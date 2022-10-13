@@ -1,8 +1,13 @@
-import React from "react";
+import React, {useEffect} from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useLocation  } from "react-router-dom";
 
 const NavBar = (navProp) => {
+  let location = useLocation();
+
+  useEffect(() => {
+  }, [location]);
+
   return (
     <nav
       className={`navbar navbar-expand-lg navbar-${navProp.mode} bg-${navProp.mode}`}
@@ -26,7 +31,7 @@ const NavBar = (navProp) => {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <Link
-                className="nav-link"
+                className={`nav-link ${location.pathname == "/" ? "active" : ""}`}
                 aria-current="page"
                 to="/"
               >
@@ -34,7 +39,7 @@ const NavBar = (navProp) => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/about">
+              <Link className={`nav-link ${location.pathname == "/about" ? "active" : ""}`} to="/about">
                 {navProp.linkName}
               </Link>
             </li>
